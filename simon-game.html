@@ -12,20 +12,112 @@
         }
         .game{
             background-color: black;
-            height: 600px;
-            width: 600px;
+            height: 500px;
+            width: 500px;
             border-radius: 1000px;
             margin-left: auto;
             margin-right: auto;
+            margin-top: 80px;
 
+        }
+        .green{
+            background-color: green;
+            height: 200px;
+            width: 200px;
+            margin-left: 20px;
+            margin-top: 15px;
+            border-radius: 20px;
+
+        }
+        .red{
+            background-color: red;
+            height: 200px;
+            width: 200px;
+            margin-top: 10px;
+            margin-left: 50px;
+            border-radius: 20px;
+
+        }
+        .yellow{
+            background-color: yellow;
+            height: 200px;
+            width: 200px;
+            margin-top: 65px;
+            margin-left: 20px;
+            border-radius: 20px;
+
+        }
+        .blue{
+            background-color: blue;
+            height: 200px;
+            width: 200px;
+            margin-left: 60px;
+            border-radius: 20px;
+
+
+        }
+         .circle{
+            background-color: transparent;
+            height: 500px;
+            width: 500px;
+            border-radius: 1000px;
+            margin-left: auto;
+            margin-right: auto;
+            margin-left: 382px;
+            border: solid white 80px;
+             position:absolute; top:0;
+            z-index: 200px;  
+        } 
+        .middle{
+            background-color: black;
+            height: 230px;
+            width: 230px;
+            border-radius: 1000px;
+            margin-left: 130px;
+            margin-top: 210px;
+             position:absolute; top:0;
+            z-index: 150px;  
+        }
+        .border{
+            background-color: transparent;
+            height: 500px;
+            width: 500px;
+            border-radius: 1000px;
+            margin-left: 460px;
+            margin-top: 78px;
+            border: solid 2px;
+             position:absolute; top:0;
+            z-index: 400px;  
+        }
+        .power{
+            margin-top: 160px;
+            margin-left: 235px;
+            height: 10px;
+            width: 15px;
+        }
+        .span{
+            color: orange;
+            font-size: 15px;
+            margin-top: 160px;
+            margin-left: 235px;
+            position:absolute; top:0;
+            z-index: 410px;  
         }
     </style>
 </head>
-<body class = background>
-
-        <div class = game>
+<body>
+        
+    <div class = game>
+        <div class = middle></div>
+        <div>
             <button class = green></button>
+            <button class = red></button>
         </div>
+        <div><button class = yellow></button><button class = blue></button></div>
+    </div>
+    <div class = circle></div>
+    <div class = border></div>
+           
         
     
 </body>
