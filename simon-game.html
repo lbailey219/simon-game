@@ -4,7 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+  </head>
+    <title>Simon</title>
 
     <style>
         .background{
@@ -12,8 +14,8 @@
         }
         .game{
             background-color: black;
-            height: 500px;
-            width: 500px;
+            height: 510px;
+            width: 510px;
             border-radius: 1000px;
             margin-left: auto;
             margin-right: auto;
@@ -24,8 +26,8 @@
             background-color: green;
             height: 200px;
             width: 200px;
-            margin-left: 20px;
-            margin-top: 15px;
+            margin-left: 24px;
+            margin-top: 24px;
             border-radius: 20px;
 
         }
@@ -34,7 +36,7 @@
             height: 200px;
             width: 200px;
             margin-top: 10px;
-            margin-left: 55px;
+            margin-left: 54px;
             border-radius: 20px;
 
         }
@@ -42,7 +44,7 @@
             background-color: yellow;
             height: 200px;
             width: 200px;
-            margin-top: 57px;
+            margin-top: 46px;
             margin-left: 22px;
             border-radius: 20px;
 
@@ -51,18 +53,18 @@
             background-color: blue;
             height: 200px;
             width: 200px;
-            margin-left: 55px;
+            margin-left: 54px;
             border-radius: 20px;
 
 
         }
          .circle{
+             pointer-events: none;
             background-color: transparent;
-            height: 500px;
-            width: 500px;
+            height: 510px;
+            width: 510px;
             border-radius: 1000px;
-            margin-left: auto;
-            margin-right: auto;
+
             margin-left: 382px;
             border: solid white 80px;
              position:absolute; top:0;
@@ -73,26 +75,27 @@
             height: 230px;
             width: 230px;
             border-radius: 1000px;
-            margin-left: 137px;
-            margin-top: 200px;
+            margin-left: 144px;
+            margin-top: 210px;
              position:absolute; top:0;
             z-index: 150px;  
         }
         .border{
+            pointer-events: none;
             background-color: transparent;
             height: 500px;
             width: 500px;
             border-radius: 1000px;
             margin-left: 460px;
-            margin-top: 78px;
-            border: solid 2px;
+            margin-top: 79px;
+            border: solid 6px;
              position:absolute; top:0;
             z-index: 400px;  
         }
         .power{
             background-color: gray;
             margin-top: 270px;
-            margin-left: 228px;
+            margin-left: 232px;
             height: 30px;
             width: 45px;
             border-radius: 20px;
@@ -102,30 +105,99 @@
         .simon{
             color: white;
             font-size: 30px;
-            margin-top: 300px;
-            margin-left: 206px;
+            margin-top: 305px;
+            margin-left: 208px;
             position:absolute; top:0;
             z-index: 410px;  
+        }
+        .fas {
+            font-size: 20px;
+        }
+        .blinker1{
+            pointer-events: none;
+             background-color: green;
+            height: 200px;
+            width: 200px;
+            border-radius: 20px;
+        }
+        .blinker2{
+            pointer-events: none;
+            background-color: red;
+            height: 200px;
+            width: 200px;
+            border-radius: 20px;
+        }
+        .blinker3{
+            pointer-events: none;
+            background-color: yellow;
+            height: 200px;
+            width: 200px;
+            border-radius: 20px
+        }
+        .blinker4{
+            pointer-events: none;
+            background-color: blue;
+            height: 200px;
+            width: 200px;
+            border-radius: 20px
         }
     </style>
 </head>
 <body>
+    <div class = "container"> 
+        <div class = "game">
+            <div class = "middle">
+            </div>
+            
+            <div>
+                <button class = "button green" onclick= "userInput()" id = [0] ><div class = blinker1></div></button>
+                <button class = "button red" onclick= "userInput()" id = [1]><div class = blinker2></div></button>
+            </div>
+            
+            <div>
+                <button class = "button yellow" onclick= "userInput()" id = [2]><div class = blinker3></div></button>
+                <button class = "button blue" onclick= "userInput()" id = [3]><div class = blinker4></div></button>
+            </div>
+            <button  class = "power" onclick= "random()">
+                <i class = "fas fa-power-off"></i>
+            </button>
+            <span class = "simon">SIMON</span>
+        </div>
+       
+        <div class = "circle"></div>
+        <div class = "border"></div>
+    </div> 
+  
+    <script>
+        var gameArray=[]
+        var userArray = []
+        var blinkers =[ "blinker1", "blinker2", "blinker3", "blinker4" ];
+        var colors = ["green", "red", "yellow", "blue"];
+         power = document.getElementsByClassName ("power")
+         power.onclick = random()
+         
+         button = document.getElementsByClassName("button")
+        button.onclick = userInput()
+         
+         function random(){
+        randomNum = Math.floor(Math.random() * blinkers.length);
+        gameArray.push (randomNum) 
+        // console.log(gameArray)
+         }
+
+        function userInput(){
+            userClick = document.getElementsByName(colors)
+            userArray.push(userClick)
+            console.log(userArray)
+        }
+
         
-    <div class = game>
-        <div class = middle></div>
-        <div>
-            <button class = green></button>
-            <button class = red></button>
-        </div>
-        <div>
-            <button class = yellow></button>
-            <button class = blue></button>
-        </div>
-        <button class = power></button>
-        <span class = simon>SIMON</span>
-    </div>
-    <div class = circle></div>
-    <div class = border></div>
+    
+        
+         
+       
+    
+    </script>
 
            
         
