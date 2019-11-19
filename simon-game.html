@@ -150,13 +150,13 @@
             </div>
             
             <div>
-                <button class = "button green" onclick= "userInput()" id = [0] ><div class = blinker1></div></button>
-                <button class = "button red" onclick= "userInput()" id = [1]><div class = blinker2></div></button>
+                <button class = "button green" onclick= "userInput('green')" id = "0" ><div class = blinker1></div></button>
+                <button class = "button red" onclick= "userInput('red')" id = "1"><div class = blinker2></div></button>
             </div>
             
             <div>
-                <button class = "button yellow" onclick= "userInput()" id = [2]><div class = blinker3></div></button>
-                <button class = "button blue" onclick= "userInput()" id = [3]><div class = blinker4></div></button>
+                <button class = "button yellow" onclick= "userInput('yellow')" id = "3"><div class = blinker3></div></button>
+                <button class = "button blue" onclick= "userInput('blue')" id = "4"><div class = blinker4></div></button>
             </div>
             <button  class = "power" onclick= "random()">
                 <i class = "fas fa-power-off"></i>
@@ -172,7 +172,6 @@
         var gameArray=[]
         var userArray = []
         var blinkers =[ "blinker1", "blinker2", "blinker3", "blinker4" ];
-        var colors = ["green", "red", "yellow", "blue"];
          power = document.getElementsByClassName ("power")
          power.onclick = random()
          
@@ -182,14 +181,51 @@
          function random(){
         randomNum = Math.floor(Math.random() * blinkers.length);
         gameArray.push (randomNum) 
-        // console.log(gameArray)
+        console.log(gameArray)
          }
-
-        function userInput(){
-            userClick = document.getElementsByName(colors)
+         
+           
+            function userInput(color){
+            if(color === 'green'){
+            userClick = document.getElementById("0")
+            userArray.push(userClick)
+            console.log(userArray)
+            }
+            if (color ==='red'){
+            userClick = document.getElementById("1")
             userArray.push(userClick)
             console.log(userArray)
         }
+            }
+        
+            // function userInput(color){
+             
+            //  }
+            //  }
+         /*
+                sudo code
+                func game(timeThru){
+                    while keepgoing = true
+                        i=0
+                        while i != timeThru
+                            random
+                        end
+                        whie userArray.length != cpuArray.length
+                            user pick
+                        end
+                        is userArra === cpuArray?
+                        if true{
+                             timeThru++
+                             
+                        else keepGoing = false
+                    end
+                }
+
+
+
+         */
+        
+        
 
         
     
