@@ -14,20 +14,21 @@
         }
         .game{
             background-color: black;
-            height: 510px;
-            width: 510px;
+            height: 597px;
+            width: 597px;
             border-radius: 1000px;
-            margin-left: auto;
-            margin-right: auto;
-            margin-top: 80px;
+             margin-left: 25%;
+           
+            margin-top: 57px;
+            border: solid white 26px;
 
         }
         .green{
             background-color: green;
             height: 200px;
             width: 200px;
-            margin-left: 24px;
-            margin-top: 24px;
+            margin-left: 94px;
+            margin-top: 69px;
             border-radius: 20px;
 
         }
@@ -36,7 +37,7 @@
             height: 200px;
             width: 200px;
             margin-top: 10px;
-            margin-left: 54px;
+            margin-left: 84px;
             border-radius: 20px;
 
         }
@@ -44,8 +45,8 @@
             background-color: yellow;
             height: 200px;
             width: 200px;
-            margin-top: 46px;
-            margin-left: 22px;
+            margin-top: 54px;
+            margin-left: 94px;
             border-radius: 20px;
 
         }
@@ -53,7 +54,7 @@
             background-color: blue;
             height: 200px;
             width: 200px;
-            margin-left: 54px;
+            margin-left: 84px;
             border-radius: 20px;
 
 
@@ -61,41 +62,53 @@
          .circle{
              pointer-events: none;
             background-color: transparent;
-            height: 510px;
-            width: 510px;
+            height: 520px;
+            width: 520px;
             border-radius: 1000px;
-
-            margin-left: 382px;
-            border: solid white 80px;
+            margin-top: 40px;
+            margin-right: 79px; 
+            border: solid white 81px;
+            
              position:absolute; top:0;
             z-index: 200px;  
         } 
         .middle{
             background-color: black;
-            height: 230px;
-            width: 230px;
+            height: 240px;
+            width: 240px;
             border-radius: 1000px;
-            margin-left: 144px;
-            margin-top: 210px;
+            margin-left: 222px;
+            margin-top: 255px;
              position:absolute; top:0;
             z-index: 150px;  
         }
         .border{
             pointer-events: none;
             background-color: transparent;
-            height: 500px;
-            width: 500px;
+            height: 510px;
+            width: 510px;
             border-radius: 1000px;
-            margin-left: 460px;
-            margin-top: 79px;
-            border: solid 6px;
+            margin-left: 79px;
+            
+            margin-top: 117px;
+            border: solid 7px;
              position:absolute; top:0;
             z-index: 400px;  
         }
+        .attempt{
+            background-color: transparent;
+            margin-right: 20px;
+            height: 530px;
+            width: 530px;
+            border-radius: 1000px;
+            position: absolute;
+            z-index: 80px;
+            /* border: solid white 40px; */
+        }
         .power{
             background-color: gray;
-            margin-top: 270px;
-            margin-left: 232px;
+            margin-top: 320px;
+            margin-left: 320px;
             height: 30px;
             width: 45px;
             border-radius: 20px;
@@ -105,8 +118,8 @@
         .simon{
             color: white;
             font-size: 30px;
-            margin-top: 305px;
-            margin-left: 208px;
+            margin-top: 355px;
+            margin-left: 295px;
             position:absolute; top:0;
             z-index: 410px;  
         }
@@ -146,26 +159,29 @@
 <body>
     <div class = "container"> 
         <div class = "game">
+            <div class = "circle"></div>
             <div class = "middle">
             </div>
             
             <div>
-                <button class = "button green" onclick= "userInput('green')" id = "0" ><div class = blinker1></div></button>
-                <button class = "button red" onclick= "userInput('red')" id = "1"><div class = blinker2></div></button>
-            </div>
-            
-            <div>
-                <button class = "button yellow" onclick= "userInput('yellow')" id = "3"><div class = blinker3></div></button>
-                <button class = "button blue" onclick= "userInput('blue')" id = "4"><div class = blinker4></div></button>
-            </div>
-            <button  class = "power" onclick= "random()">
-                <i class = "fas fa-power-off"></i>
-            </button>
-            <span class = "simon">SIMON</span>
-        </div>
-       
-        <div class = "circle"></div>
-        <div class = "border"></div>
+                    <div class = "border"></div>
+                <button class = "button green" onclick= "userInput('green')" id = "1" >
+                        <div class = "blinker1" id = "1"></div></button>
+                        <button class = "button red" onclick= "userInput('red')" id = "2">
+                                <div class = "blinker2" id = "2"></div></button>
+                            </div>
+                            
+                            <div>
+                                <button class = "button yellow" onclick= "userInput('yellow')" id = "3"><div class = blinker3 id = "3"></div></button>
+                                <button class = "button blue" onclick= "userInput('blue')" id = "4"><div class = blinker4 id="4"></div></button>
+                            </div>
+                            <button  class = "power" onclick= random()>
+                                <i class = "fas fa-power-off"></i>
+                            </button>
+                            <span class = "simon">SIMON</span>
+                        </div>
+                        
+                        <div class = "attempt"></div>
     </div> 
   
     <script>
@@ -173,35 +189,106 @@
         var userArray = []
         var blinkers =[ "blinker1", "blinker2", "blinker3", "blinker4" ];
          power = document.getElementsByClassName ("power")
-         power.onclick = random()
+        //  power.onclick = random()
+         var buttonColors =[ "button green", "button red", "button yellow", "button blue" ];
+         buttonColors
          
-         button = document.getElementsByClassName("button")
-        button.onclick = userInput()
+        //  button = document.getElementsByClassName("button")
+        // button.onclick = userInput()
+       
+                 function game(gameArray){
+                        timeThru = 0
+                        keepgoing = true
+                        userClick = 0
+                        randomNum = 0
+                       
+                            console.log(timeThru)
+                
+                        for (i in gameArray)
+                        
+                        if (gameArray.length != userArray.length){
+
+                            userInput()
+                        }
+                        if (userClick == randomNum){
+                            return true
+                             timeThru++
+                             console.log(timeThru)
+                        }
+                             
+                        else (userClick !== randomNum)
+                        return false
+                        keepgoing = false
+                        end
+                    
+                        
+                
+                     
+                }
          
-         function random(){
-        randomNum = Math.floor(Math.random() * blinkers.length);
-        gameArray.push (randomNum) 
-        console.log(gameArray)
-         }
+         function random(blinker){
+             //var blinkers =[ "blinker1", "blinker2", "blinker3", "blinker4" ];
+
+            randomNum = Math.floor(Math.random() * blinkers.length)
+            // console.log(blinkers[randomNum])
+            blinkerList = document.getElementsByClassName(blinkers[randomNum]);
+            blinkerWeFound = blinkerList[0];
+            id = blinkerWeFound.id;
+            gameArray.push (id) 
+            // userClick = 0
+            // timeThru = 0
+            // for (i in gameArray)
+                        
+            //             if (gameArray.length != userArray.length){
+
+            //                 userInput()
+            //             }
+            //             if (userClick == randomNum){
+            //                 return true
+            //                  timeThru++
+            //                  console.log(timeThru)
+            //             }
+                             
+            //             else (userClick !== randomNum)
+            //             return false
+            //             end
+
+            // if(randomNum === '0'){
+                
+            console.log(gameArray)
+        }
+        //  }
          
            
             function userInput(color){
+          
             if(color === 'green'){
-            userClick = document.getElementById("0")
+            userClick = document.getElementById("1")
             userArray.push(userClick)
             console.log(userArray)
             }
             if (color ==='red'){
-            userClick = document.getElementById("1")
+            userClick = document.getElementById("2")
             userArray.push(userClick)
             console.log(userArray)
-        }
             }
-        
-            // function userInput(color){
+            
+            if(color === 'yellow'){
+            userClick = document.getElementById("3")
+            userArray.push(userClick)
+            console.log(userArray)
+            }
+            
+            if(color === 'blue'){
+            userClick = document.getElementById("4")
+            userArray.push(userClick)
+            console.log(userArray)
+            }
+            }
+
+           
              
-            //  }
-            //  }
+             
          /*
                 sudo code
                 func game(timeThru){
