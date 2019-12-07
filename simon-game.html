@@ -5,7 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
-  </head>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+
+</head>
     <title>Simon</title>
 
     <style>
@@ -20,7 +22,7 @@
              margin-left: 25%;
            
             margin-top: 57px;
-            border: solid white 26px;
+            border: solid white 24px;
 
         }
         .green{
@@ -28,16 +30,18 @@
             height: 200px;
             width: 200px;
             margin-left: 94px;
-            margin-top: 69px;
+            margin-top: 72px;
             border-radius: 20px;
-
+           
         }
+
+       
         .red{
             background-color: red;
             height: 200px;
             width: 200px;
             margin-top: 10px;
-            margin-left: 84px;
+            margin-left: 88px;
             border-radius: 20px;
 
         }
@@ -54,7 +58,7 @@
             background-color: blue;
             height: 200px;
             width: 200px;
-            margin-left: 84px;
+            margin-left: 88px;
             border-radius: 20px;
 
 
@@ -66,8 +70,8 @@
             width: 520px;
             border-radius: 1000px;
             margin-top: 40px;
-            margin-right: 79px; 
-            border: solid white 81px;
+            margin-right: 80px; 
+            border: solid white 82px;
             
              position:absolute; top:0;
             z-index: 200px;  
@@ -77,7 +81,7 @@
             height: 240px;
             width: 240px;
             border-radius: 1000px;
-            margin-left: 222px;
+            margin-left: 218px;
             margin-top: 255px;
              position:absolute; top:0;
             z-index: 150px;  
@@ -108,7 +112,7 @@
         .power{
             background-color: gray;
             margin-top: 320px;
-            margin-left: 320px;
+            margin-left: 290px;
             height: 30px;
             width: 45px;
             border-radius: 20px;
@@ -119,7 +123,7 @@
             color: white;
             font-size: 30px;
             margin-top: 355px;
-            margin-left: 295px;
+            margin-left: 291px;
             position:absolute; top:0;
             z-index: 410px;  
         }
@@ -154,176 +158,250 @@
             width: 200px;
             border-radius: 20px
         }
+        #count{
+        background-color:white;
+        height:35px;
+        width:70px;
+        margin-left:13px;
+        border-radius:20%;
+        font-size:1.2em;
+        color: black;
+        text-align: center;
+        }
+
+        #strict{
+            background-color: gray;
+            margin-left: 340px;
+            margin-top: 320px;
+            height: 30px;
+            width: 50px;
+            border-radius: 20px;
+            position:absolute; top:0;
+            z-index: 400px; 
+            font-size: 15px; 
+
+        }
+        .active{
+        background-color:#9C27B0!important;
+        font-weight: bold!important;
+        }
     </style>
 </head>
 <body>
+   
+    
     <div class = "container"> 
         <div class = "game">
             <div class = "circle"></div>
             <div class = "middle">
             </div>
             
-            <div>
+                <div>
                     <div class = "border"></div>
-                <button class = "button green" onclick= "userInput('green')" id = "1" >
-                        <div class = "blinker1" id = "1"></div></button>
-                        <button class = "button red" onclick= "userInput('red')" id = "2">
-                                <div class = "blinker2" id = "2"></div></button>
-                            </div>
-                            
-                            <div>
-                                <button class = "button yellow" onclick= "userInput('yellow')" id = "3"><div class = blinker3 id = "3"></div></button>
-                                <button class = "button blue" onclick= "userInput('blue')" id = "4"><div class = blinker4 id="4"></div></button>
-                            </div>
-                            <button  class = "power" onclick= random()>
-                                <i class = "fas fa-power-off"></i>
-                            </button>
-                            <span class = "simon">SIMON</span>
-                        </div>
-                        
-                        <div class = "attempt"></div>
+                        <button id="green" data-color="green"  class = "button green" ></button>
+                        <button id="red" data-color="red" class = "button red"></button>
+                        <button id="yellow" data-color="yellow" class = "button yellow"></button>
+                        <button id="blue" data-color="blue" class = "button blue"></button> 
+                </div>
+                <button  id="start" class = "power">
+                    <i class = "fas fa-power-off"></i>
+                </button>
+                
+                <span class = "simon">SIMON
+                    <div id="count"></div>
+                </span>
+                <button id="strict">Strict</button>
+         </div> 
     </div> 
   
     <script>
-        var gameArray=[]
-        var userArray = []
-        var blinkers =[ "blinker1", "blinker2", "blinker3", "blinker4" ];
-         power = document.getElementsByClassName ("power")
-        //  power.onclick = random()
-         var buttonColors =[ "button green", "button red", "button yellow", "button blue" ];
-         buttonColors
-         
-        //  button = document.getElementsByClassName("button")
-        // button.onclick = userInput()
-       
-                 function game(gameArray){
-                        timeThru = 0
-                        keepgoing = true
-                        userClick = 0
-                        randomNum = 0
-                       
-                            console.log(timeThru)
-                
-                        for (i in gameArray)
-                        
-                        if (gameArray.length != userArray.length){
+      
+                $(document).ready(function(){
+ 
+ 
+ let simon={
+      colors:["green","red","yellow","blue"],
+      sequence:[],
+      userSequence:[],
+      strict:false,
+      buttonSounds : {},
+      init: function(){
+        let objectContext=this;
 
-                            userInput()
-                        }
-                        if (userClick == randomNum){
-                            return true
-                             timeThru++
-                             console.log(timeThru)
-                        }
-                             
-                        else (userClick !== randomNum)
-                        return false
-                        keepgoing = false
-                        end
-                    
-                        
-                
-                     
-                }
-         
-         function random(blinker){
-             //var blinkers =[ "blinker1", "blinker2", "blinker3", "blinker4" ];
-
-            randomNum = Math.floor(Math.random() * blinkers.length)
-            // console.log(blinkers[randomNum])
-            blinkerList = document.getElementsByClassName(blinkers[randomNum]);
-            blinkerWeFound = blinkerList[0];
-            id = blinkerWeFound.id;
-            gameArray.push (id) 
-            // userClick = 0
-            // timeThru = 0
-            // for (i in gameArray)
-                        
-            //             if (gameArray.length != userArray.length){
-
-            //                 userInput()
-            //             }
-            //             if (userClick == randomNum){
-            //                 return true
-            //                  timeThru++
-            //                  console.log(timeThru)
-            //             }
-                             
-            //             else (userClick !== randomNum)
-            //             return false
-            //             end
-
-            // if(randomNum === '0'){
-                
-            console.log(gameArray)
-        }
-        //  }
-         
            
-            function userInput(color){
+        $("#start").on("click",function(){
           
-            if(color === 'green'){
-            userClick = document.getElementById("1")
-            userArray.push(userClick)
-            console.log(userArray)
-            }
-            if (color ==='red'){
-            userClick = document.getElementById("2")
-            userArray.push(userClick)
-            console.log(userArray)
-            }
-            
-            if(color === 'yellow'){
-            userClick = document.getElementById("3")
-            userArray.push(userClick)
-            console.log(userArray)
-            }
-            
-            if(color === 'blue'){
-            userClick = document.getElementById("4")
-            userArray.push(userClick)
-            console.log(userArray)
-            }
-            }
+           objectContext.setSounds();
+          
+          
+            //executes for the first time
+      objectContext.emptyAllSequences();
+           //I generate the first of the sequence
+      objectContext.generateAndAddRandomColor();
+           //I display the sequence on the board
+      objectContext.displaySequenceOnBoard();
 
-           
-             
-             
-         /*
-                sudo code
-                func game(timeThru){
-                    while keepgoing = true
-                        i=0
-                        while i != timeThru
-                            random
-                        end
-                        whie userArray.length != cpuArray.length
-                            user pick
-                        end
-                        is userArra === cpuArray?
-                        if true{
-                             timeThru++
-                             
-                        else keepGoing = false
-                    end
-                }
-
-
-
-         */
-        
-        
-
-        
-    
-        
-         
        
+           }); 
+
+          $("#title").addClass('tada animated');  
+                    
+          $("#strict").on("click",function(){
+            $(this).toggleClass("active");
+            
+            if($(this).hasClass("active")){
+              objectContext.strict=true;
+            }else{
+              objectContext.strict=false;
+            }
+            
+          });
+
+       $(".button").on("click",function(){
+ 
+                      const color=$(this).attr("data-color");
+                     objectContext.lightButton(color,0);
+                      objectContext.userSequence.push(color);
+
+
+                      let isSequenceCorrect=objectContext.checkUserSequence();
+            
+                      if(!isSequenceCorrect){
+                        //stop the click of the failed attempt to restart the next round clean
+                        $(this).stop();
+                      }
+                     if(objectContext.userSequence.length===objectContext.sequence.length || !isSequenceCorrect){
+
+                          if(isSequenceCorrect){
+                     if(objectContext.userSequence.length ===20){
+                       //user wins and the game restarts
+                       alert("You won!");
+                       $("#count").html("WON");
+                       objectContext.emptyAllSequences();
+                            $("#start").removeClass("active");
+                            $("#start").click();
+                     }else{
+                      //go to next step of the sequence 
+                   setTimeout(function(){objectContext.generateAndAddRandomColor();
+                            objectContext.displaySequenceOnBoard();
+                            //reset the userSequence to check the whole sequence again 
+                            objectContext.emptyUserSequence(); }, 1500);               
+                     } 
+                          }else{
+
+                            //if strict mode is on
+                            if(objectContext.strict){
+                             $(this).stop();
+                             alert("you lost, game will restart"); 
+                              //user looses
+                            $("#count").html("Lost");
+                            //wipe sequence array
+                             objectContext.emptyAllSequences();
+                            $("#start").removeClass("active");
+                            $("#start").click();  
+                            }else{
+                              $(this).stop();
+                              alert("Wrong answer. You can try again!");
+                              setTimeout(function(){
+                            objectContext.displaySequenceOnBoard();
+                            //reset the userSequence to check the whole sequence again 
+                            objectContext.emptyUserSequence(); }, 1500);  
+                                  
+
+                            }
+                          }
+            }
+         
+     });
+
+  },
+      setSounds:function(){
+        
+        this.buttonSounds["green"] = new Audio("https://s3.amazonaws.com/freecodecamp/simonSound1.mp3");
+        this.buttonSounds["red"] = new Audio("https://s3.amazonaws.com/freecodecamp/simonSound2.mp3");
+        this.buttonSounds["yellow"] = new Audio("https://s3.amazonaws.com/freecodecamp/simonSound3.mp3");
+        this.buttonSounds["blue"] = new Audio("https://s3.amazonaws.com/freecodecamp/simonSound4.mp3");
+        
+      },
+   
+      emptyUserSequence: function(){
+            this.userSequence.length=0;
+      },
+   
+      emptyAISequence: function(){
+               this.sequence.length=0;
+      },
+   
+      emptyAllSequences:function(){
+        this.emptyUserSequence();
+        this.emptyAISequence();
+      },
+      updateCount: function(){
+        $("#count").html(this.sequence.length);
+        
+      },
+   
+      checkUserSequence:function(){
+        
+        for(let i=0,len=this.userSequence.length;i<len;i++){
+          
+          if(this.userSequence[i]!== this.sequence[i]){
+            return false;
+          }
+          
+        }
+        
+        
+        return true;    
+      },
+   
+      generateAndAddRandomColor:function(){
+ 
+        const randColorIndex=Math.floor(Math.random()*4);
+           
+        
+        const randColor=this.colors[randColorIndex];
+        this.sequence.push(randColor);
+        this.updateCount(); 
+
+      },
+   
+      displaySequenceOnBoard: function(){
+       
+	      this.lightButtonsInSequence(this.sequence);
+      },
+         lightButtonsInSequence: function(sequence) {
+           var color = sequence[0];
+           var remainingSequence = sequence.slice(1);
+           var lightNextButtonFunction = remainingSequence.length > 0 ? jQuery.proxy(function(){
+             this.lightButtonsInSequence(remainingSequence);
+                }, this) : null;
+           console.log(this.buttonSounds[color]);
+           this.buttonSounds[color].play();
+           $("#"+color).animate({opacity : .3}, 500).animate({opacity : 1}, 250, lightNextButtonFunction);
+         },
+    lightButton: function(color,i,countBlocker){
+        
+        var objectContext=this;
+        
+                     $("#"+color).delay(800*i) 
+        .animate({opacity : 0.3}, 300,function(){
+
+                objectContext.buttonSounds[color].play();
+                  $("#"+color).animate({opacity : 1}, 250,function(){
+                 
+ 
+                  });
+              
+                  
+                });
+        
+        
+      }
+    }
+ simon.init();
+});
     
     </script>
-
-           
-        
-    
 </body>
 </html>
